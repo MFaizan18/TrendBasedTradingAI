@@ -34,12 +34,14 @@ Follow these steps to run the project:
    git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
 
 2. **Navigate to the Project Directory**
-
+   ```bash
    cd TrendBasedTradingAI
 
 4. **Install the Required Packages**
+   ```bash
    pip install -r requirements.txt
 
-5. **Run the Script**
+6. **Run the Script**
+   ```bash
    python TrendBasedTradingAI.py
 
