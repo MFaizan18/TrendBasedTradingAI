@@ -24,3 +24,12 @@ The model processes stock market data, calculates essential indicators, and appl
 
 This project demonstrates the potential of combining AI techniques with financial data analysis to create an intelligent trading strategy. It provides a foundation for further exploration and refinement in the field of AI-driven stock market trading.
 
+## How to Run the Project
+
+Follow these steps to run the project:
+
+1. **Clone the Repository**
+   Clone the repository to your local machine using the following command:
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
+
