@@ -31,5 +31,5 @@ Follow these steps to run the project:
 1. **Clone the Repository**
    Clone the repository to your local machine using the following command:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
 
