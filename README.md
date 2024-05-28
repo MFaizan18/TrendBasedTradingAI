@@ -107,13 +107,13 @@ In this section, we perform feature engineering on our dataset. We calculate and
 
 2. ## Calculate 50-day EMA: The Exponential Moving Average (EMA) is a type of moving average that gives more weight to recent prices, which can make it more responsive to new information. We're calculating the 50-day EMA based on the 'Adj Close' prices and adding it as a new column '50_EMA' to our DataFrame.
 
-Drop NaN values: Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with data.dropna(inplace=True).
+3. ## Drop NaN values: Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with data.dropna(inplace=True).
 
-Drop the 'Close' column: We drop the 'Close' column as we have the 'Adj Close' column which is a more accurate reflection of the stock's value, as it accounts for dividends and stock splits.
+4. ## Drop the 'Close' column: We drop the 'Close' column as we have the 'Adj Close' column which is a more accurate reflection of the stock's value, as it accounts for dividends and stock splits.
 
-Store dates in a separate DataFrame: We store the dates in a separate DataFrame for future use, as we're going to reset the index of our main DataFrame in the next step.
+5. ## Store dates in a separate DataFrame: We store the dates in a separate DataFrame for future use, as we're going to reset the index of our main DataFrame in the next step.
 
-Reset index: We reset the index of our DataFrame. This is done because we want our index to be a simple numerical index, which can be useful for certain operations or algorithms.
+6. ## Reset index: We reset the index of our DataFrame. This is done because we want our index to be a simple numerical index, which can be useful for certain operations or algorithms.
 
 This completes our feature engineering process, and our data is now ready for the next steps of our analysis or modeling.
 
