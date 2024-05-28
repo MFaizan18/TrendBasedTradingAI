@@ -28,24 +28,24 @@ This project demonstrates the potential of combining AI techniques with financia
 
 Follow these steps to run the project:
 
-1. **Clone the Repository**
+* **Clone the Repository**
    Clone the repository to your local machine using the following command:
    ```bash
    git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
 
-2. **Navigate to the Project Directory**
+* **Navigate to the Project Directory**
    ```bash
    cd TrendBasedTradingAI
 
-4. **Install the Required Packages**
+* **Install the Required Packages**
    ```bash
    pip install -r requirements.txt
 
-6. **Run the Script**
+* **Run the Script**
    ```bash
    python TrendBasedTradingAI.py
 
-## Model Performance Overview
+## 5) Model Performance Overview
 
 **Data Acquisition**
 
