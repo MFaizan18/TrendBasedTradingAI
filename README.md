@@ -45,3 +45,17 @@ Follow these steps to run the project:
    ```bash
    python TrendBasedTradingAI.py
 
+
+
+## Model Performance Overview
+
+### 1. Data Preparation
+To gather the necessary market data for our stock prediction model, we utilize the `yfinance` library in Python. This library allows us to download historical stock price data from Yahoo Finance. We specify the ticker symbol "^NSEI", which represents the Nifty 50 index on the National Stock Exchange of India.
+
+```python
+import yfinance as yf
+
+# Download stock price data
+data = yf.download("^NSEI", start="2000-01-01", end="2024-05-25", interval="1d")
+
+
