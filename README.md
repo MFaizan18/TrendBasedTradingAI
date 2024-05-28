@@ -98,5 +98,42 @@ And the last 10 rows of the data are as follows:
 | 2024-05-23 00:00:00 | 22614.09961  | 22993.59961  | 22577.44922  | 22967.65039  | 22967.65039 | 369800 |
 | 2024-05-24 00:00:00 | 22930.75     | 23026.40039  | 22908        | 22957.09961  | 22957.09961 | 261900 |
 
+## Feature Engineering
+
+In this section, we perform feature engineering on our dataset. We calculate and add new features that might be useful for our model.
+
+1. ## Calculate RSI: The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It is used to identify overbought or oversold conditions in a market. We're using the RSIIndicator from the ta library to calculate the RSI with a window of 14 days (which is a common choice) based on the 'Adj Close' prices. The result is then added as a new column 'RSI' to our DataFrame.
+
+2. ## Calculate 50-day EMA: The Exponential Moving Average (EMA) is a type of moving average that gives more weight to recent prices, which can make it more responsive to new information. We're calculating the 50-day EMA based on the 'Adj Close' prices and adding it as a new column '50_EMA' to our DataFrame.
+
+Drop NaN values: Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with data.dropna(inplace=True).
+
+Drop the 'Close' column: We drop the 'Close' column as we have the 'Adj Close' column which is a more accurate reflection of the stock's value, as it accounts for dividends and stock splits.
+
+Store dates in a separate DataFrame: We store the dates in a separate DataFrame for future use, as we're going to reset the index of our main DataFrame in the next step.
+
+Reset index: We reset the index of our DataFrame. This is done because we want our index to be a simple numerical index, which can be useful for certain operations or algorithms.
+
+This completes our feature engineering process, and our data is now ready for the next steps of our analysis or modeling.
+
+```python
+# Calculate RSI
+rsi_indicator = RSIIndicator(close=data['Adj Close'], window=14)
+data['RSI'] = rsi_indicator.rsi()
+
+# Calculate 50-day EMA
+ema_indicator = EMAIndicator(close=data['Adj Close'], window=50)
+data['50_EMA'] = ema_indicator.ema_indicator()
+data.dropna(inplace=True)
+
+# Drop the 'Close' column
+data = data.drop(columns=['Close'])
+
+# Store dates in a separate DataFrame
+dates = data.index.to_frame(index=False)
+
+# Reset index
+data.reset_index(drop=True, inplace=True)
+
 
 
