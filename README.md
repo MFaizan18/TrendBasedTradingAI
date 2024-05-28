@@ -49,7 +49,7 @@ Follow these steps to run the project:
 
 ## Model Performance Overview
 
-## Data Preparation
+## Data Acquisition
 
 We use the `yfinance` library in Python to download historical stock price data from Yahoo Finance. We evaluate our model on five major indices:
 
