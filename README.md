@@ -49,13 +49,23 @@ Follow these steps to run the project:
 
 ## Model Performance Overview
 
-### 1. Data Preparation
-To gather the necessary market data for our stock prediction model, we utilize the `yfinance` library in Python. This library allows us to download historical stock price data from Yahoo Finance. We specify the ticker symbol "^NSEI", which represents the Nifty 50 index on the National Stock Exchange of India.
+## Data Preparation
+
+We use the `yfinance` library in Python to download historical stock price data from Yahoo Finance. We evaluate our model on five major indices:
+
+1. ^NSEI - Nifty 50 index on the National Stock Exchange of India
+2. ^SPX - S&P 500 index in the USA
+3. ^HSI - Hang Seng index in Hong Kong
+4. ^FTSE - FTSE 100 index in London
+5. ^N225 - Nikkei 225 index in Japan
+
+For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as an example. The data spans from January 1, 2000, to May 25, 2024, providing us with over two decades of daily stock price data.
 
 ```python
 import yfinance as yf
 
 # Download stock price data
 data = yf.download("^NSEI", start="2000-01-01", end="2024-05-25", interval="1d")
+
 
 
