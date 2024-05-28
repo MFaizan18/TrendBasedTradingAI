@@ -45,8 +45,6 @@ Follow these steps to run the project:
    ```bash
    python TrendBasedTradingAI.py
 
-
-
 ## Model Performance Overview
 
 ## Data Acquisition
@@ -61,11 +59,12 @@ We use the `yfinance` library in Python to download historical stock price data 
 
 For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as an example. The data spans from January 1, 2010, to May 25, 2024, providing us with over a decades of daily stock price data.
 
-```python
+```bash
 import yfinance as yf
 
-# Download stock price data
-data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
+   # Download stock price data
+   data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
+
 
 Here's a glimpse of the data we're working with. The first 10 rows of the data are as follows:
 
