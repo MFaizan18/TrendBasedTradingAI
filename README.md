@@ -59,13 +59,13 @@ We use the `yfinance` library in Python to download historical stock price data 
 4. ^FTSE - FTSE 100 index in London
 5. ^N225 - Nikkei 225 index in Japan
 
-For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as an example. The data spans from January 1, 2000, to May 25, 2024, providing us with over two decades of daily stock price data.
+For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as an example. The data spans from January 1, 2010, to May 25, 2024, providing us with over a decades of daily stock price data.
 
 ```python
 import yfinance as yf
 
 # Download stock price data
-data = yf.download("^NSEI", start="2000-01-01", end="2024-05-25", interval="1d")
+data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
 
 
 
