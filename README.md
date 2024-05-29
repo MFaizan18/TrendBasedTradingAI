@@ -290,8 +290,13 @@ num_down = list(cluster_trends.values()).count("DOWN")
 print("Number of 'UP' labels:", num_up)
 print("Number of 'DOWN' labels:", num_down)
 ```
--
+The process of labeling the clusters involves using a linear regression model to determine whether each cluster exhibits an upward ('UP') or downward ('DOWN') trend based on the consequent parts of the windows in each cluster. Initially, we instantiate a linear regression model and initialize a dictionary named cluster_trends to store the trend labels for each cluster. The list training_windows_antece_normalized is converted to a NumPy array and reshaped into a 2D array for easier manipulation.
 
+Using the delta matrix, calculated earlier with the Kronecker delta function, we select the windows belonging to each cluster. The condition delta[:, j] == 1 ensures we get the windows associated with cluster j. If a cluster has no windows, it is skipped. For each window in the cluster, the consequent part (following the antecedent part) is extracted and stored in a list. These consequent parts are concatenated to form a single array, which is used to fit the linear regression model.
+
+The independent variable t, representing time steps, is created as an array of indices corresponding to the combined consequent parts. The model is then fitted to this data, and the slope of the fitted model indicates the trend. A positive slope suggests an 'UP' trend, while a negative slope indicates a 'DOWN' trend. This trend label is stored in the cluster_trends dictionary.
+
+Finally, the number of 'UP' and 'DOWN' labels in the cluster_trends dictionary is counted and printed. By labeling the clusters in this manner, we identify the overall trend within each cluster based on the stock market behavior in the consequent parts of the windows. This labeling is essential for making predictions about future stock market trends and will be used in subsequent sections to label the test data and make trading decisions based on the predicted trends
 
 
 
