@@ -96,6 +96,7 @@ And the last 10 rows of the data are as follows:
 | 2024-05-23 00:00:00 | 22614.09961  | 22993.59961  | 22577.44922  | 22967.65039  | 22967.65039 | 369800 |
 | 2024-05-24 00:00:00 | 22930.75     | 23026.40039  | 22908        | 22957.09961  | 22957.09961 | 261900 |
 ```
+
 ## 6) Feature Engineering
 
 In this section, we perform feature engineering on our dataset. We calculate and add new features that might be useful for our model.
@@ -134,6 +135,9 @@ dates = data.index.to_frame(index=False)
 data.reset_index(drop=True, inplace=True)
 ```
 This completes our feature engineering process, and our data is now ready for the next steps of our analysis or modeling.
+
+## Data Segmentation and Normalization
+
 
 
 
