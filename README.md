@@ -30,20 +30,18 @@ Follow these steps to run the project:
 
 **4.1) Clone the Repository**
 Clone the repository to your local machine using the following command:
-      ```
+```bash
 git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
 
+
 **4.2) Navigate to the Project Directory**
-      ```bash
-      cd TrendBasedTradingAI
+cd TrendBasedTradingAI
 
 **4.3) Install the Required Packages**
-      ```bash
-      pip install -r requirements.txt
+pip install -r requirements.txt
 
 **4.4) Run the Script**
-      ```bash
-      python TrendBasedTradingAI.py
+python TrendBasedTradingAI.py
 
 ## 5) Model Performance Overview
 
