@@ -161,6 +161,7 @@ training_windows_antece_normalized = [np.concatenate([scaler.fit_transform(windo
 **7.5) Print Number of Training Windows:** Finally, the number of training windows is printed.
 ```python
 print(f"Number of training windows: {len(training_windows)}")
+output: Number of training windows: 2595
 ```
 
 
