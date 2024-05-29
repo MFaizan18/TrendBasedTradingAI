@@ -217,6 +217,18 @@ A two-dimensional numpy array delta is created, with dimensions equal to the num
 
 In this project, the Kronecker delta function is used in the "Labelling the Clusters" section, where its role and usage will be further explained.
 
+**8.3) Applying K-Means Clustering to Antecedent Windows**
+Now, let's apply the K-means clustering algorithm to the antecedent windows extracted from the training data. We'll use the k_means_clustering function we defined earlier to perform this task.and we are going to set number of clusters 'k=50'. Here's how we call the function:
+```python
+# Extract the antecedent part from each window
+antecedent_windows = [window[:wte] for window in training_windows_antece_normalized]
+
+# Run K-means clustering on the antecedent windows
+labels, centroids, delta = k_means_clustering(np.array(antecedent_windows), k)
+```
+This code snippet extracts the antecedent part from each window in the training dataset and then applies the K-means clustering algorithm to these antecedent windows. The resulting labels, centroids, and delta matrix will be used for further analysis and labeling of the clusters.
+
+
 
 
 
