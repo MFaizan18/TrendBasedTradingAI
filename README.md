@@ -9,8 +9,8 @@ TrendBasedTradingAI is an AI-driven project designed to optimize stock market tr
 1.3 **K-means Clustering**: Implements K-means clustering to categorize market behavior into distinct trends.
 1.4 **Trend Labeling**: Uses linear regression to label each cluster as an upward or downward trend.
 1.5 **Test Data Evaluation**: Applies the trained model to test data, categorizing each window into an upward or downward trend.
-1. **Trading Strategy Implementation**: Simulates a trading strategy based on identified trends, including transaction cost considerations.
-7. **Performance Metrics**: Evaluates the strategy's performance using metrics such as annual returns and the Sharpe Ratio.
+1.6 **Trading Strategy Implementation**: Simulates a trading strategy based on identified trends, including transaction cost considerations.
+1.7 **Performance Metrics**: Evaluates the strategy's performance using metrics such as annual returns and the Sharpe Ratio.
 
 ## 2) Usage
 
@@ -18,9 +18,9 @@ The model processes stock market data, calculates essential indicators, and appl
 
 ## 3) Key Results
 
-- **Cluster Trend Labeling**: Determines the trend for each cluster using linear regression.
-- **Trading Simulation**: Simulates trading actions based on trend predictions.
-- **Performance Evaluation**: Calculates returns for each year and evaluates the Sharpe Ratio to assess the strategy's risk-adjusted performance.
+3.1 **Cluster Trend Labeling**: Determines the trend for each cluster using linear regression.
+3.2 **Trading Simulation**: Simulates trading actions based on trend predictions.
+3.3 **Performance Evaluation**: Calculates returns for each year and evaluates the Sharpe Ratio to assess the strategy's risk-adjusted performance.
 
 This project demonstrates the potential of combining AI techniques with financial data analysis to create an intelligent trading strategy. It provides a foundation for further exploration and refinement in the field of AI-driven stock market trading.
 
@@ -28,26 +28,26 @@ This project demonstrates the potential of combining AI techniques with financia
 
 Follow these steps to run the project:
 
-* **Clone the Repository**
-   Clone the repository to your local machine using the following command:
-   ```bash
-   git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
+4.1 **Clone the Repository**
+      Clone the repository to your local machine using the following command:
+      ```bash
+      git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
 
-* **Navigate to the Project Directory**
-   ```bash
-   cd TrendBasedTradingAI
+4.2 **Navigate to the Project Directory**
+      ```bash
+      cd TrendBasedTradingAI
 
-* **Install the Required Packages**
-   ```bash
-   pip install -r requirements.txt
+4.3 **Install the Required Packages**
+      ```bash
+      pip install -r requirements.txt
 
-* **Run the Script**
-   ```bash
-   python TrendBasedTradingAI.py
+4.4 **Run the Script**
+      ```bash
+      python TrendBasedTradingAI.py
 
 ## 5) Model Performance Overview
 
-**Data Acquisition**
+5.1 **Data Acquisition**
 
 We use the `yfinance` library in Python to download historical stock price data from Yahoo Finance. We evaluate our model on five major indices:
 
@@ -59,11 +59,10 @@ We use the `yfinance` library in Python to download historical stock price data 
 
 For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as an example. The data spans from January 1, 2010, to May 25, 2024, providing us with over a decades of daily stock price data.
 
- 
     ```bash
-  import yfinance as yf
+    import yfinance as yf
 
-## Download stock price data
+5.2 **Download stock price data**
 data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
 
 Here's a glimpse of the data we're working with. The first 10 rows of the data are as follows:
@@ -97,7 +96,7 @@ And the last 10 rows of the data are as follows:
 | 2024-05-23 00:00:00 | 22614.09961  | 22993.59961  | 22577.44922  | 22967.65039  | 22967.65039 | 369800 |
 | 2024-05-24 00:00:00 | 22930.75     | 23026.40039  | 22908        | 22957.09961  | 22957.09961 | 261900 |
 
-## Feature Engineering
+6) ## 6) Feature Engineering
 
 In this section, we perform feature engineering on our dataset. We calculate and add new features that might be useful for our model.
 
