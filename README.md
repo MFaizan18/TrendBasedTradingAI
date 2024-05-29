@@ -290,6 +290,7 @@ num_down = list(cluster_trends.values()).count("DOWN")
 print("Number of 'UP' labels:", num_up)
 print("Number of 'DOWN' labels:", num_down)
 ```
+-
 
 
 
