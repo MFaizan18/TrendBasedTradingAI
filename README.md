@@ -4,13 +4,13 @@ TrendBasedTradingAI is an AI-driven project designed to optimize stock market tr
 
 ## 1) Features
 
-1.1 **Stock Price Data Collection**: Utilizes Yahoo Finance to download historical stock price data.
-1.2 **Technical Indicator Calculation**: Calculates the Relative Strength Index (RSI) and 50-day Exponential Moving Average (EMA) to assist in identifying market trends.
-1.3 **K-means Clustering**: Implements K-means clustering to categorize market behavior into distinct trends.
-1.4 **Trend Labeling**: Uses linear regression to label each cluster as an upward or downward trend.
-1.5 **Test Data Evaluation**: Applies the trained model to test data, categorizing each window into an upward or downward trend.
-1.6 **Trading Strategy Implementation**: Simulates a trading strategy based on identified trends, including transaction cost considerations.
-1.7 **Performance Metrics**: Evaluates the strategy's performance using metrics such as annual returns and the Sharpe Ratio.
+**1.1) Stock Price Data Collection**: Utilizes Yahoo Finance to download historical stock price data.
+**1.2) Technical Indicator Calculation**: Calculates the Relative Strength Index (RSI) and 50-day Exponential Moving Average (EMA) to assist in identifying market trends.
+**1.3) K-means Clustering**: Implements K-means clustering to categorize market behavior into distinct trends.
+**1.4) Trend Labeling**: Uses linear regression to label each cluster as an upward or downward trend.
+**1.5) Test Data Evaluation**: Applies the trained model to test data, categorizing each window into an upward or downward trend.
+**1.6) Trading Strategy Implementation**: Simulates a trading strategy based on identified trends, including transaction cost considerations.
+**1.7) Performance Metrics**: Evaluates the strategy's performance using metrics such as annual returns and the Sharpe Ratio.
 
 ## 2) Usage
 
@@ -18,9 +18,9 @@ The model processes stock market data, calculates essential indicators, and appl
 
 ## 3) Key Results
 
-3.1 **Cluster Trend Labeling**: Determines the trend for each cluster using linear regression.
-3.2 **Trading Simulation**: Simulates trading actions based on trend predictions.
-3.3 **Performance Evaluation**: Calculates returns for each year and evaluates the Sharpe Ratio to assess the strategy's risk-adjusted performance.
+**3.1) Cluster Trend Labeling**: Determines the trend for each cluster using linear regression.
+**3.2) Trading Simulation**: Simulates trading actions based on trend predictions.
+**3.3) Performance Evaluation**: Calculates returns for each year and evaluates the Sharpe Ratio to assess the strategy's risk-adjusted performance.
 
 This project demonstrates the potential of combining AI techniques with financial data analysis to create an intelligent trading strategy. It provides a foundation for further exploration and refinement in the field of AI-driven stock market trading.
 
@@ -28,26 +28,26 @@ This project demonstrates the potential of combining AI techniques with financia
 
 Follow these steps to run the project:
 
-4.1 **Clone the Repository**
+**4.1) Clone the Repository**
       Clone the repository to your local machine using the following command:
       ```bash
       git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
 
-4.2 **Navigate to the Project Directory**
+**4.2) Navigate to the Project Directory**
       ```bash
       cd TrendBasedTradingAI
 
-4.3 **Install the Required Packages**
+**4.3) Install the Required Packages**
       ```bash
       pip install -r requirements.txt
 
-4.4 **Run the Script**
+**4.4) Run the Script**
       ```bash
       python TrendBasedTradingAI.py
 
 ## 5) Model Performance Overview
 
-5.1 **Data Acquisition**
+**5.1) Data Acquisition**
 
 We use the `yfinance` library in Python to download historical stock price data from Yahoo Finance. We evaluate our model on five major indices:
 
@@ -62,7 +62,7 @@ For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as a
     ```bash
     import yfinance as yf
 
-5.2 **Download stock price data**
+**5.2) Download stock price data**
 data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
 
 Here's a glimpse of the data we're working with. The first 10 rows of the data are as follows:
@@ -96,42 +96,54 @@ And the last 10 rows of the data are as follows:
 | 2024-05-23 00:00:00 | 22614.09961  | 22993.59961  | 22577.44922  | 22967.65039  | 22967.65039 | 369800 |
 | 2024-05-24 00:00:00 | 22930.75     | 23026.40039  | 22908        | 22957.09961  | 22957.09961 | 261900 |
 
-6) ## 6) Feature Engineering
+## 6) Feature Engineering
 
 In this section, we perform feature engineering on our dataset. We calculate and add new features that might be useful for our model.
 
-1. ## Calculate RSI: The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It is used to identify overbought or oversold conditions in a market. We're using the RSIIndicator from the ta library to calculate the RSI with a window of 14 days (which is a common choice) based on the 'Adj Close' prices. The result is then added as a new column 'RSI' to our DataFrame.
+**6.1) Calculate RSI:** The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It is used to identify overbought or oversold conditions in a market. We're using the RSIIndicator from the ta library to calculate the RSI with a window of 14 days (which is a common choice) based on the 'Adj Close' prices. The result is then added as a new column 'RSI' to our DataFrame.
+    ```python
+    # Calculate RSI
+    rsi_indicator = RSIIndicator(close=data['Adj Close'], window=14)
+    data['RSI'] = rsi_indicator.rsi()
 
-2. ## Calculate 50-day EMA: The Exponential Moving Average (EMA) is a type of moving average that gives more weight to recent prices, which can make it more responsive to new information. We're calculating the 50-day EMA based on the 'Adj Close' prices and adding it as a new column '50_EMA' to our DataFrame.
+**6.2) Calculate 50-day EMA:** The Exponential Moving Average (EMA) is a type of moving average that gives more weight to recent prices, which can make it more responsive to new information. We're calculating the 50-day EMA based on the 'Adj Close' prices and adding it as a new column '50_EMA' to our DataFrame.
+    ```python
+      # Calculate 50-day EMA
+      ema_indicator = EMAIndicator(close=data['Adj Close'], window=50)
+      data['50_EMA'] = ema_indicator.ema_indicator()
+      data.dropna(inplace=True)
 
-3. ## Drop NaN values: Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with data.dropna(inplace=True).
+**6.3) Drop NaN values:** Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with data.dropna(inplace=True).
+      ```python
+      # Drop the 'Close' column
+      data = data.drop(columns=['Close'])
 
-4. ## Drop the 'Close' column: We drop the 'Close' column as we have the 'Adj Close' column which is a more accurate reflection of the stock's value, as it accounts for dividends and stock splits.
+**6.4) Drop the 'Close' column:** We drop the 'Close' column as we have the 'Adj Close' column which is a more accurate reflection of the stock's value, as it accounts for dividends and stock splits.
+      ```python
+      # Drop the 'Close' column
+      data = data.drop(columns=['Close'])
 
-5. ## Store dates in a separate DataFrame: We store the dates in a separate DataFrame for future use, as we're going to reset the index of our main DataFrame in the next step.
+**6.7) Store dates in a separate DataFrame:** We store the dates in a separate DataFrame for future use, as we're going to reset the index of our main DataFrame in the next step.
+      ```python
+      # Store dates in a separate DataFrame
+      dates = data.index.to_frame(index=False)
 
-6. ## Reset index: We reset the index of our DataFrame. This is done because we want our index to be a simple numerical index, which can be useful for certain operations or algorithms.
+**6.8) Reset index:** We reset the index of our DataFrame. This is done because we want our index to be a simple numerical index, which can be useful for certain operations or algorithms.
+      ```python
+      # Reset index
+      data.reset_index(drop=True, inplace=True)
 
 This completes our feature engineering process, and our data is now ready for the next steps of our analysis or modeling.
 
-```python
-# Calculate RSI
-rsi_indicator = RSIIndicator(close=data['Adj Close'], window=14)
-data['RSI'] = rsi_indicator.rsi()
 
-# Calculate 50-day EMA
-ema_indicator = EMAIndicator(close=data['Adj Close'], window=50)
-data['50_EMA'] = ema_indicator.ema_indicator()
-data.dropna(inplace=True)
 
-# Drop the 'Close' column
-data = data.drop(columns=['Close'])
 
-# Store dates in a separate DataFrame
-dates = data.index.to_frame(index=False)
 
-# Reset index
-data.reset_index(drop=True, inplace=True) -
+
+
+
+
+
 
 
 
