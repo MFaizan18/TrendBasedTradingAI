@@ -131,7 +131,7 @@ data = data.drop(columns=['Close'])
 dates = data.index.to_frame(index=False)
 
 # Reset index
-data.reset_index(drop=True, inplace=True)
+data.reset_index(drop=True, inplace=True) -
 
 
 
