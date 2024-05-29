@@ -136,12 +136,32 @@ data.reset_index(drop=True, inplace=True)
 ```
 This completes our feature engineering process, and our data is now ready for the next steps of our analysis or modeling.
 
-## Data Segmentation and Normalization
+## 7) Data Segmentation and Normalization
 
-
-
-
-
+**7.1) Divide Data into Training and Test Sets:** The data is divided into training and test sets based on the year. The training set includes data up to and including the year 2020, and the test set includes data from 2021 onwards.
+```python
+training_data = data[dates['Date'].dt.year <= 2020].copy()
+test_data = data[dates['Date'].dt.year > 2020].copy()
+```
+**7.2) Define Window Lengths:** The window lengths for the antecedent (input) and consequent (output) parts of the model are defined. The total window length is 50, the antecedent part is 40, and the consequent part is the difference between the two (10).
+```python
+wtr = 50  # total window length
+wte = 40  # window length for the antecedent part
+wlm = wtr - wte  # window length for the consequent part
+```
+**7.3) Initialize MinMaxScaler:** The MinMaxScaler from sklearn is initialized. This scaler will be used to normalize the data.
+```python
+scaler = MinMaxScaler()
+```
+**7.4) Create and Normalize Antecedent Parts for Training Data:** The antecedent parts for the training data are created and normalized. This is done by creating sliding windows of length wtr over the training data, and then normalizing the first wte elements of each window. The normalized antecedent part and the non-normalized consequent part are then concatenated to form the final window.
+```python
+training_windows = [training_data[i:i + wtr] for i in range(len(training_data) - wtr + 1)]
+training_windows_antece_normalized = [np.concatenate([scaler.fit_transform(window.iloc[:wte]), window.iloc[wte:wtr]], axis=0) for window in training_windows]
+```
+**7.5) Print Number of Training Windows:** Finally, the number of training windows is printed.
+```python
+print(f"Number of training windows: {len(training_windows)}")
+```
 
 
 
