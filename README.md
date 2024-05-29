@@ -113,10 +113,10 @@ ema_indicator = EMAIndicator(close=data['Adj Close'], window=50)
 data['50_EMA'] = ema_indicator.ema_indicator()
 data.dropna(inplace=True)
 ```
-**6.3) Drop NaN values:** Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with data.dropna(inplace=True).
+**6.3) Drop NaN values:** Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with the ```dropna``` command. This command removes all rows with at least one NaN value in the `data` DataFrame and the changes are made directly to `data`.
 ```python
-# Drop the 'Close' column
-data = data.drop(columns=['Close'])
+# Drop NaN values
+data.dropna(inplace=True)
 ```
 **6.4) Drop the 'Close' column:** We drop the 'Close' column as we have the 'Adj Close' column which is a more accurate reflection of the stock's value, as it accounts for dividends and stock splits.
 ```python
