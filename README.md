@@ -30,21 +30,21 @@ Follow these steps to run the project:
 
 **4.1) Clone the Repository**
 Clone the repository to your local machine using the following command:
-
 ```bash 
 git clone https://github.com/MFaizan18/TrendBasedTradingAI.git
 ```
-
-
 **4.2) Navigate to the Project Directory**
+```bash 
 cd TrendBasedTradingAI
-
+```
 **4.3) Install the Required Packages**
+```bash 
 pip install -r requirements.txt
-
+```
 **4.4) Run the Script**
+```bash
 python TrendBasedTradingAI.py
-
+```
 ## 5) Model Performance Overview
 
 **5.1) Data Acquisition**
@@ -59,14 +59,14 @@ We use the `yfinance` library in Python to download historical stock price data 
 
 For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as an example. The data spans from January 1, 2010, to May 25, 2024, providing us with over a decades of daily stock price data.
 
-    ```bash
-    import yfinance as yf
-
+```python
+import yfinance as yf
+```
 **5.2) Download stock price data**
 data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
 
 Here's a glimpse of the data we're working with. The first 10 rows of the data are as follows:
-
+```
 | Date                | Open         | High         | Low          | Close        | Adj Close   | Volume |
 |---------------------|--------------|--------------|--------------|--------------|-------------|--------|
 | 2007-09-17 00:00:00 | 4518.450195  | 4549.049805  | 4482.850098  | 4494.649902  | 4494.649902 | 0      |
@@ -95,7 +95,7 @@ And the last 10 rows of the data are as follows:
 | 2024-05-22 00:00:00 | 22576.59961  | 22629.5      | 22483.15039  | 22597.80078  | 22597.80078 | 290300 |
 | 2024-05-23 00:00:00 | 22614.09961  | 22993.59961  | 22577.44922  | 22967.65039  | 22967.65039 | 369800 |
 | 2024-05-24 00:00:00 | 22930.75     | 23026.40039  | 22908        | 22957.09961  | 22957.09961 | 261900 |
-
+```
 ## 6) Feature Engineering
 
 In this section, we perform feature engineering on our dataset. We calculate and add new features that might be useful for our model.
