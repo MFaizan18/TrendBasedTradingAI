@@ -4,12 +4,12 @@ TrendBasedTradingAI is an AI-driven project designed to optimize stock market tr
 
 ## 1) Features
 
-1. **Stock Price Data Collection**: Utilizes Yahoo Finance to download historical stock price data.
-2. **Technical Indicator Calculation**: Calculates the Relative Strength Index (RSI) and 50-day Exponential Moving Average (EMA) to assist in identifying market trends.
-3. **K-means Clustering**: Implements K-means clustering to categorize market behavior into distinct trends.
-4. **Trend Labeling**: Uses linear regression to label each cluster as an upward or downward trend.
-5. **Test Data Evaluation**: Applies the trained model to test data, categorizing each window into an upward or downward trend.
-6. **Trading Strategy Implementation**: Simulates a trading strategy based on identified trends, including transaction cost considerations.
+1.1 **Stock Price Data Collection**: Utilizes Yahoo Finance to download historical stock price data.
+1.2 **Technical Indicator Calculation**: Calculates the Relative Strength Index (RSI) and 50-day Exponential Moving Average (EMA) to assist in identifying market trends.
+1.3 **K-means Clustering**: Implements K-means clustering to categorize market behavior into distinct trends.
+1.4 **Trend Labeling**: Uses linear regression to label each cluster as an upward or downward trend.
+1.5 **Test Data Evaluation**: Applies the trained model to test data, categorizing each window into an upward or downward trend.
+1. **Trading Strategy Implementation**: Simulates a trading strategy based on identified trends, including transaction cost considerations.
 7. **Performance Metrics**: Evaluates the strategy's performance using metrics such as annual returns and the Sharpe Ratio.
 
 ## 2) Usage
@@ -59,10 +59,11 @@ We use the `yfinance` library in Python to download historical stock price data 
 
 For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as an example. The data spans from January 1, 2010, to May 25, 2024, providing us with over a decades of daily stock price data.
 
-```bash
-import yfinance as yf
+ 
+    ```bash
+  import yfinance as yf
 
-# Download stock price data
+## Download stock price data
 data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
 
 Here's a glimpse of the data we're working with. The first 10 rows of the data are as follows:
