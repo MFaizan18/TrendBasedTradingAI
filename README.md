@@ -164,6 +164,59 @@ print(f"Number of training windows: {len(training_windows)}")
 output: Number of training windows: 2595
 ```
 
+## 8) K-Means Clustering
+K-means is a popular unsupervised learning algorithm used for clustering. The goal of K-means is to group data points into distinct non-overlapping subgroups. One of the major application of K-means is segmentation of data.
+
+In your project, K-means clustering is advantageous as it groups similar stock market trends, represented by 'windows', into clusters. This allows for the identification of common patterns in stock behavior. Each cluster is then labeled as 'UP' or 'DOWN' using linear regression, indicating the overall trend of the stocks within that cluster. This information can be used to make informed predictions about future stock market trends, aiding in decision-making for investments and trading. More insights and detailed analysis will be provided in the upcoming sections of the project.
+
+**8.1) Python implementatio of K-means clustering algorithm**
+This Python function, k_means_clustering, is an implementation of the K-means clustering algorithm. The function takes four parameters: data (the dataset to be clustered), k (the number of clusters), max_iterations (the maximum number of iterations to run the algorithm), and random_state (a seed for the random number generator to ensure reproducibility).
+```python
+def k_means_clustering(data, k, max_iterations=500, random_state=0):
+    np.random.seed(random_state)
+
+    # Initialize centroids randomly from the data points
+    centroids = data[np.random.choice(len(data), size=k, replace=False)]
+    
+    for _ in range(max_iterations):
+        # Assign each data point to the nearest cluster center
+        distances = np.linalg.norm(data.reshape(len(data), -1)[:, np.newaxis] - centroids.reshape(len(centroids), -1), axis=2)
+        labels = np.argmin(distances, axis=1)
+
+        # Recalculate the centroids as the mean of the current clusters
+        new_centroids = np.empty_like(centroids)
+        empty_clusters = 0
+        for i in range(k):
+            members = data[labels == i]
+            if len(members) > 0:
+                new_centroids[i] = np.mean(members, axis=0)
+            else:
+                new_centroids[i] = centroids[i]
+                #new_centroids[i] = data[np.random.randint(len(data))]
+                empty_clusters += 1
+
+        # Check for convergence
+        if np.array_equal(centroids, new_centroids):
+            break
+
+        centroids = new_centroids
+```
+The k_means_clustering function begins by initializing the centroids, randomly selecting k data points from the dataset to serve as the initial centroids. The main part of the function is a loop that runs for a maximum of max_iterations iterations. In each iteration, the function calculates the Euclidean distance between each data point and each centroid, then assigns each data point to the cluster whose centroid is nearest. The function then recalculates the centroids, initializing an array to hold the new centroids and calculating the new centroid for each cluster. If a cluster has no data points, its centroid remains the same, otherwise, the new centroid is the mean of the data points in the cluster. The function also keeps track of the number of empty clusters, incrementing a counter, empty_clusters, if a cluster has no data points. After recalculating the centroids, the function checks for convergence. If the centroids have not changed from the previous iteration, the algorithm has converged, and the function breaks out of the loop. Otherwise, it updates the centroids with the new values and proceeds to the next iteration. The function returns the final centroids and the labels of the clusters for each data point, which can be used to understand the clustering of the data and to make predictions for new data points.
+
+**8.2) Kronecker delta function**
+This function is part of a clustering algorithm, likely K-means. It calculates the Kronecker delta function, used to indicate cluster membership of data points.
+```python
+# Calculate Kronecker delta function
+    delta = np.zeros((len(data), k))
+    for i in range(len(data)):
+        delta[i, labels[i]] = 1
+
+    return labels, centroids, delta
+```
+A two-dimensional numpy array delta is created, with dimensions equal to the number of data points and clusters. The code then iterates over each data point, marking its assigned cluster in the delta array. The function returns labels (the cluster assignment for each data point), centroids (the final cluster centers), and delta (a binary matrix indicating cluster membership).
+
+In this project, the Kronecker delta function is used in the "Labelling the Clusters" section, where its role and usage will be further explained.
+
 
 
 
