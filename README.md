@@ -240,6 +240,46 @@ model = LinearRegression()
 # Initialize the trend labels
 cluster_trends = {}
 ```
+**9.2) Preparing the Data**
+Next, we convert the list training_windows_antece_normalized to a NumPy array and flatten it to 2D for easier manipulation.
+```python
+# Convert the list to a numpy array and flatten it to 2D
+data_array = np.array(training_windows_antece_normalized).reshape(len(training_windows_antece_normalized), -1)
+```
+**9.3) Selecting Windows for Each Cluster**
+Using the delta matrix, calculated earlier with the Kronecker delta function, we select the windows belonging to each cluster. The condition delta[:, j] == 1 ensures we get the windows associated with cluster j.
+```python
+# For each cluster
+for j in range(k):
+    # Get the windows that belong to the cluster
+    windows = data_array[delta[:, j] == 1]
+    
+    # If the cluster has no windows, skip it
+    if len(windows) == 0:
+        continue
+```
+**9.4) Extracting and Combining Consequent Parts**
+For each window in the cluster, the consequent part (following the antecedent part) is extracted and stored in a list. These consequent parts are then concatenated to form a single array, which is used to fit the linear regression model.
+```python
+    # Initialize an empty list to store the consequent parts
+    consequent_parts = []
+    
+    # For each window in the cluster
+    for window in windows:
+        # Get the consequent part of the window
+        consequent_part = window[wte:]
+        
+        # Add the consequent part to the list
+        consequent_parts.append(consequent_part)
+    
+    # Combine the consequent parts of all windows in the cluster
+    combined_consequent_part = np.concatenate(consequent_parts)
+```
+    
+
+
+
+
 
 
 
