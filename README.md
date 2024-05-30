@@ -399,6 +399,14 @@ years = [2021, 2022, 2023, 2024]
 ```
 The trading cost ```c``` is set to 0.00135. This cost represents the transaction fee associated with each trade, expressed as a proportion of the trade value. In this project, we are simulating trades on the National Stock Exchange of India (NSEI), and the trading cost is based on the equity delivery charges from Zerodha, a popular brokerage in India. Zerodha charges a small fee for every buy and sell transaction, which is a standard practice in stock trading. Including this cost in our simulation ensures that our trading strategy reflects real-world conditions more accurately.
 
+We also initialize a list to store the final value of the portfolio for each year.
+```python
+# Initialize a list to store the final value of your portfolio for each year
+final_values = []
+```
+
+
+
 
 
 
