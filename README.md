@@ -384,6 +384,22 @@ output: Counter({'UP': 476, 'DOWN': 339})
 ```
 By labeling the test data windows, we predict the trend for each window based on its similarity to the clusters identified in the training data. This process helps in making informed decisions about stock market behavior, providing a basis for further analysis and trading strategies.
 
+## 11) Trading Strategy
+
+In this section, we implement a trading strategy based on the trend labels assigned to the test data windows. The goal is to simulate a trading portfolio, buying and selling shares based on predicted trends, and evaluate the performance over a series of years.
+
+**11.1) Initial Setup**
+We start by defining initial parameters, including the trading cost and the years for which we will evaluate the trading strategy.
+```python
+# Define the cost
+c = 0.00135
+
+# Define the years
+years = [2021, 2022, 2023, 2024]
+```
+The trading cost ```c``` is set to 0.00135. This cost represents the transaction fee associated with each trade, expressed as a proportion of the trade value. In this project, we are simulating trades on the National Stock Exchange of India (NSEI), and the trading cost is based on the equity delivery charges from Zerodha, a popular brokerage in India. Zerodha charges a small fee for every buy and sell transaction, which is a standard practice in stock trading. Including this cost in our simulation ensures that our trading strategy reflects real-world conditions more accurately.
+
+
 
 
 
