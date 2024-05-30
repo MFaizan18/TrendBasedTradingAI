@@ -275,6 +275,45 @@ For each window in the cluster, the consequent part (following the antecedent pa
     # Combine the consequent parts of all windows in the cluster
     combined_consequent_part = np.concatenate(consequent_parts)
 ```
+**9.5) Fitting the Linear Regression Model:**
+The independent variable t, representing time steps, is created as an array of indices corresponding to the combined consequent parts. The model is then fitted to this data, and the slope of the fitted model indicates the trend.
+```python
+    # Fit the linear regression model
+    t = np.arange(len(combined_consequent_part)).reshape(-1, 1)  # This is t
+    model.fit(t, combined_consequent_part)  # This calculates a and b
+
+    # Get the slope of the model
+    slope = model.coef_[0]  # This is b
+```
+**9.6) Assigning Trend Labels:**
+A positive slope suggests an 'UP' trend, while a negative slope indicates a 'DOWN' trend. This trend label is stored in the cluster_trends dictionary.
+```python
+    # Assign the trend label based on the slope
+    if slope > 0:
+        cluster_trends[j] = "UP"
+    else:
+        cluster_trends[j] = "DOWN"
+```
+**9.7) Counting and Printing Trend Labels:**
+Finally, the number of 'UP' and 'DOWN' labels in the cluster_trends dictionary is counted and printed. By labeling the clusters in this manner, we identify the overall trend within each cluster based on the stock market behavior in the consequent parts of the windows. This labeling is essential for making predictions about future stock market trends and will be used in subsequent sections to label the test data and make trading decisions based on the predicted trends.
+```python
+# Count the number of "UP" labels
+num_up = list(cluster_trends.values()).count("UP")
+
+# Count the number of "DOWN" labels
+num_down = list(cluster_trends.values()).count("DOWN")
+
+# Print the counts
+print("Number of 'UP' labels:", num_up)
+print("Number of 'DOWN' labels:", num_down)
+
+output: Number of 'UP' labels: 50
+        Number of 'DOWN' labels: 0
+
+```
+
+
+
     
 
 
