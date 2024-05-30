@@ -336,6 +336,7 @@ test_windows_normalized = [scaler.transform(window) for window in test_windows]
 
 # Print the total number of windows
 print(f"Total number of windows: {len(test_windows)}")
+
 output: Total number of windows: 815
 ```
 **10.3) Initializing Trend Labels for Test Data:**
@@ -378,6 +379,7 @@ label_counts = Counter(test_trend_labels)
 
 # Print the counts
 print(label_counts)
+
 output: Counter({'UP': 476, 'DOWN': 339})
 ```
 By labeling the test data windows, we predict the trend for each window based on its similarity to the clusters identified in the training data. This process helps in making informed decisions about stock market behavior, providing a basis for further analysis and trading strategies.
