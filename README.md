@@ -312,6 +312,81 @@ output: Number of 'UP' labels: 50
 
 ```
 
+## 10) Labeling the Test Data Windows
+In this section, we label the test data windows based on the clusters generated from the training data. The goal is to predict whether each test window shows an upward ('UP') or downward ('DOWN') trend by comparing it to the trained clusters
+
+**10.1) Setting Up and Creating Test Windows:**
+We start by setting the size of the antecedent part of each window and creating a separate DataFrame for the test dates.
+```python
+antecedent_size = 40
+
+# Create a separate DataFrame for the test dates
+test_dates = dates[dates['Date'].dt.year > 2020].copy()
+```
+Next, we create windows for the test data, ensuring each window has the same antecedent size.
+```python
+# Create windows for the test data
+test_windows = [test_data[i:i + antecedent_size] for i in range(len(test_data) - antecedent_size + 1)]
+```
+**10.2) Normalizing Test Windows:**
+To ensure consistency in the data, we normalize each test window using the scaler fitted on the training data.
+```python
+# Normalize each window
+test_windows_normalized = [scaler.transform(window) for window in test_windows]
+
+# Print the total number of windows
+print(f"Total number of windows: {len(test_windows)}")
+```
+**10.3) Initializing Trend Labels for Test Data:**
+We initialize an empty list to store the trend labels for the test data.
+```python
+# Initialize the trend labels for the test data
+test_trend_labels = []
+```
+**10.4) Labeling Each Test Window:**
+For each normalized test window, we calculate the Euclidean distance to each cluster center to determine the closest cluster.
+```python
+# For each window in the test data
+for window in test_windows_normalized:
+    
+    # Calculate the Euclidean distance to each cluster center
+    distances = np.linalg.norm(centroids - window, axis=1)
+
+    # Find the index of the closest cluster center
+    closest_cluster = np.argmin(distances)
+```
+**10.5) Assigning Trend Labels:**
+We check if the closest cluster index is valid and assign the corresponding trend label from the cluster_trends dictionary. If the index is invalid, an error message is printed.
+```python
+    # Check if the closest cluster index is a valid index for the labels array
+    if closest_cluster < len(labels):
+        # Assign the trend label of the closest cluster to the window
+        test_trend_labels.append(cluster_trends[labels[closest_cluster]])
+    else:
+        # If the closest cluster index is not a valid index for the labels array, print an error message
+        print(f"Error: closest cluster index {closest_cluster} is not a valid index for the labels array.")
+```
+**10.6) Counting and Printing Trend Labels:**
+To summarize the results, we count the number of each trend label in the test_trend_labels list using the Counter class from the collections module.
+```python
+# Import the Counter class from the collections module
+from collections import Counter
+
+# Count the number of each label in test_trend_labels
+label_counts = Counter(test_trend_labels)
+
+# Print the counts
+print(label_counts)
+```
+By labeling the test data windows, we predict the trend for each window based on its similarity to the clusters identified in the training data. This process helps in making informed decisions about stock market behavior, providing a basis for further analysis and trading strategies.
+
+
+
+
+
+
+
+
 
 
     
