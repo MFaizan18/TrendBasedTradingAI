@@ -410,7 +410,103 @@ We also initialize a list to store the final value of the portfolio for each yea
 # Initialize a list to store the final value of your portfolio for each year
 final_values = []
 ```
-g
+**11.2) Simulating Trading for Each Year**
+For each year, we simulate trading by initializing the starting amount of money and the number of shares owned.
+```python
+# For each year
+for year in years:
+    # Initialize the amount of money you have and the number of shares you own
+    money = 1000000.0
+    shares = 0
+
+    # Initialize a list to store trading actions
+    actions = []
+```
+We then identify the indices of the test windows that correspond to the current year.
+```python
+    # Get the indices for the current year
+    indices_year = [i for i, date in enumerate(test_dates['Date']) if date.year == year and i < len(test_windows)]
+```
+**11.3) Retrieving Test Windows and Trend Labels**
+We retrieve the test windows and trend labels for the current year based on the identified indices.
+```python
+    # Get the test windows and trend labels for the current year
+    test_windows_year = [test_windows[i] for i in indices_year]
+    test_trend_labels_year = [test_trend_labels[i] for i in indices_year]
+```
+**11.4) Executing Trades Based on Trend Labels**
+For each window in the test data for the current year, we calculate the current stock price and determine the trading action based on the trend label
+```python
+    # For each window in the test data for the current year
+    for i in range(len(test_windows_year)):
+        # Calculate the current stock price
+        current_price = test_windows_year[i].iloc[0]['Adj Close']
+
+        # Check the trend label for the current window
+        current_trend_label = test_trend_labels_year[i]
+```
+If the trend label is "UP", we buy shares at the beginning of the next window, investing 25% of the available money.
+```python
+        if current_trend_label == "UP" :
+            # If the current window is "UP", buy shares at the beginning of the next window
+            if i + 1 < len(test_windows_year):
+                next_price = test_windows_year[i + 1].iloc[0]['Adj Close']
+                shares_to_buy = math.floor((0.25 * money) / (next_price * (1 + c)))
+                money -= shares_to_buy * next_price * (1 + c)
+                shares += shares_to_buy
+                actions.append("Buy")
+```
+If the trend label is "DOWN" and we own shares, we sell all shares at the beginning of the next window.
+```python
+        elif current_trend_label == "DOWN" and shares > 0:
+            # If the current window is "DOWN", sell all shares at the beginning of the next window
+            if i + 1 < len(test_windows_year):
+                next_price = test_windows_year[i + 1].iloc[0]['Adj Close']
+                money += shares * next_price * (1 - c)
+                shares = 0
+                actions.append("Sell")
+```
+**11.5) Finalizing the Year-End Portfolio Value**
+At the end of the year, we sell any remaining shares and calculate the final value of the portfolio.
+```python
+    # Sell any shares left at the end of the last day
+    if shares > 0:
+        sell_price = test_windows_year[-1].iloc[-1]['Adj Close']
+        money += shares * sell_price * (1 - c)
+        shares = 0
+        actions.append("Sell")
+
+    # Calculate the final value of your portfolio
+    final_value = money
+
+    # Store the final value
+    final_values.append(final_value)
+```
+**11.6) Evaluating and Printing the Results**
+We calculate and print the return for each year, as well as the number of buy and sell actions executed.
+```python
+    # Calculate the return
+    return_percentage = (final_value / 1000000.0 - 1) * 100
+
+    # Print the return
+    print(f"Return for {year}: {return_percentage}%")
+
+    # Count the number of each action
+    buy_count = actions.count("Buy")
+    sell_count = actions.count("Sell")
+
+    # Print the counts
+    print(f"Number of Buy actions in {year}: {buy_count}")
+    print(f"Number of Sell actions in {year}: {sell_count}")
+```
+
+
+
+
+
+
+
+
 
 
 
