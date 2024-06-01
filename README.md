@@ -386,7 +386,8 @@ label_counts = Counter(test_trend_labels)
 # Print the counts
 print(label_counts)
 
-output: Counter({'UP': 476, 'DOWN': 339})
+Total number of windows: 798
+Counter({'UP': 798})
 ```
 By labeling the test data windows, we predict the trend for each window based on its similarity to the clusters identified in the training data. This process helps in making informed decisions about stock market behavior, providing a basis for further analysis and trading strategies.
 
