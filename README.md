@@ -578,6 +578,13 @@ Return for 2024: 2.2763819915039063%
 Number of Buy actions in 2024: 7
 Number of Sell actions in 2024: 2
 ```
+```
+Our project's results demonstrate the potential of our chosen strategy across multiple major stock exchanges over a four-year period. The strategy yielded positive returns in several instances, notably a 20.93% return for the NSEI in 2023 and a 20.96% return for the S&P 500 Index in the same year. These results highlight the strategy's potential effectiveness in certain market conditions.
+
+However, it's important to note that the strategy did not consistently yield positive results across all markets and years. For instance, the Hang Seng Index saw negative returns for three consecutive years from 2021 to 2023. This underscores the inherent risks and variability in stock market investments, and the need for robust risk management strategies.
+
+It's also worth noting that our project assumed a constant transaction cost across all markets. In reality, transaction costs can vary significantly between markets and over time. This simplification may have influenced the results and should be considered when interpreting the project's findings.
+```
 
 
 
