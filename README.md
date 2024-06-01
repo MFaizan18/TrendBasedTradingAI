@@ -516,7 +516,7 @@ Return for 2024: 5.400270834062515%
 Number of Buy actions in 2024: 56
 Number of Sell actions in 2024: 1
 ```
-Similarly, we tested the strategy on the following four other major stock exchanges:
+Similarly, I tested the strategy on the following four other major stock exchanges:
 
 ```
 ^SPX (S&P 500 Index):
@@ -547,6 +547,36 @@ Number of Sell actions in 2023: 18
 Return for 2024: 5.653056667255907%
 Number of Buy actions in 2024: 38
 Number of Sell actions in 2024: 5
+```
+```
+^HSI (Hang Seng Index):
+Return for 2021: -17.89278680816404%
+Number of Buy actions in 2021: 236
+Number of Sell actions in 2021: 4
+Return for 2022: -17.696382923300767%
+Number of Buy actions in 2022: 244
+Number of Sell actions in 2022: 2
+Return for 2023: -19.393371522597647%
+Number of Buy actions in 2023: 242
+Number of Sell actions in 2023: 1
+Return for 2024: 13.261341658862325%
+Number of Buy actions in 2024: 56
+Number of Sell actions in 2024: 2
+```
+```
+^N225 (Nikkei 225 Index):
+Return for 2021: -0.714269791054678%
+Number of Buy actions in 2021: 5
+Number of Sell actions in 2021: 3
+Return for 2022: 0.44509055836916556%
+Number of Buy actions in 2022: 10
+Number of Sell actions in 2022: 5
+Return for 2023: 1.4126984671777754%
+Number of Buy actions in 2023: 27
+Number of Sell actions in 2023: 9
+Return for 2024: 2.2763819915039063%
+Number of Buy actions in 2024: 7
+Number of Sell actions in 2024: 2
 ```
 
 
