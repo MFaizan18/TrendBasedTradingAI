@@ -500,6 +500,56 @@ We calculate and print the return for each year, as well as the number of buy an
     print(f"Number of Buy actions in {year}: {buy_count}")
     print(f"Number of Sell actions in {year}: {sell_count}")
 ```
+We tested the code on 5 major stock exchanges in the world. The ongoing example uses the ^NSEI (Nifty 50 index of India), and the returns for this index are as follows:
+```
+^NSEI:
+Return for 2021: 15.852735476040047%
+Number of Buy actions in 2021: 247
+Number of Sell actions in 2021: 1
+Return for 2022: -2.485190345751953%
+Number of Buy actions in 2022: 247
+Number of Sell actions in 2022: 1
+Return for 2023: 20.92553105589845%
+Number of Buy actions in 2023: 244
+Number of Sell actions in 2023: 1
+Return for 2024: 5.400270834062515%
+Number of Buy actions in 2024: 56
+Number of Sell actions in 2024: 1
+```
+Similarly, we tested the strategy on the following four other major stock exchanges:
+
+```
+^SPX (S&P 500 Index):
+Return for 2021: 0.6085992972644894%
+Number of Buy actions in 2021: 146
+Number of Sell actions in 2021: 17
+Return for 2022: -17.19516062675408%
+Number of Buy actions in 2022: 152
+Number of Sell actions in 2022: 22
+Return for 2023: 20.96196201629159%
+Number of Buy actions in 2023: 145
+Number of Sell actions in 2023: 18
+Return for 2024: 1.9384591040576327%
+Number of Buy actions in 2024: 31
+Number of Sell actions in 2024: 5
+```
+```
+^FTSE (FTSE 100 Index):
+Return for 2021: -5.3988042074120335%
+Number of Buy actions in 2021: 117
+Number of Sell actions in 2021: 21
+Return for 2022: -0.9240033206517562%
+Number of Buy actions in 2022: 159
+Number of Sell actions in 2022: 17
+Return for 2023: -5.708509080065793%
+Number of Buy actions in 2023: 131
+Number of Sell actions in 2023: 18
+Return for 2024: 5.653056667255907%
+Number of Buy actions in 2024: 38
+Number of Sell actions in 2024: 5
+```
+
+
 
 
 
