@@ -585,6 +585,33 @@ However, it's important to note that the strategy did not consistently yield pos
 
 It's also worth noting that our project assumed a constant transaction cost across all markets. In reality, transaction costs can vary significantly between markets and over time. This simplification may have influenced the results and should be considered when interpreting the project's findings.
 
+## 12) Evaluation with Sharpe Ratio
+
+In this section, we introduce the Sharpe Ratio as an additional evaluation metric to assess the risk-adjusted performance of our trading strategy. The Sharpe Ratio compares the average excess return (returns above the risk-free rate) to the standard deviation of those excess returns.
+
+```python
+# Risk-free rate
+risk_free_rate = 0.02  # Annual risk-free rate (2%)
+
+# Calculate the annual returns
+returns = [(final_values[i] / final_values[i-1]) - 1 for i in range(1, len(final_values))]
+
+# Calculate the excess returns (subtracting the risk-free rate from each return)
+excess_returns = [r - risk_free_rate for r in returns]
+
+# Calculate the average excess return
+average_excess_return = np.mean(excess_returns)
+
+# Calculate the standard deviation of the excess returns
+standard_deviation = np.std(excess_returns)
+
+# Calculate the Sharpe Ratio
+sharpe_ratio = average_excess_return / standard_deviation
+
+print(f"Sharpe Ratio: {sharpe_ratio}")
+```
+In the initial setup, we define the risk-free rate as 2%, representing the annual risk-free rate assumed for our evaluation. We then compute the annual returns of our trading strategy based on the final portfolio values across the specified years. Using these returns, we calculate the excess returns by subtracting the risk-free rate from each return. Next, we determine the average excess return and the standard deviation of the excess returns. Finally, we compute the Sharpe Ratio by dividing the average excess return by the standard deviation, providing a measure of risk-adjusted performance for our trading strategy.
+
 
 
 
