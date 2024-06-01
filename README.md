@@ -5,6 +5,7 @@ TrendBasedTradingAI is an AI-driven project designed to optimize stock market tr
 ## 1) Features
 
 **1.1) Stock Price Data Collection**: Utilizes Yahoo Finance to download historical stock price data.
+
 **1.2) Technical Indicator Calculation**: Calculates the Relative Strength Index (RSI) and 50-day Exponential Moving Average (EMA) to assist in identifying market trends.
 **1.3) K-means Clustering**: Implements K-means clustering to categorize market behavior into distinct trends.
 **1.4) Trend Labeling**: Uses linear regression to label each cluster as an upward or downward trend.
