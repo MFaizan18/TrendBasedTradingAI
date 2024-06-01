@@ -404,7 +404,7 @@ We also initialize a list to store the final value of the portfolio for each yea
 # Initialize a list to store the final value of your portfolio for each year
 final_values = []
 ```
-
+g
 
 
 
