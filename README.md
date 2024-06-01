@@ -612,6 +612,13 @@ print(f"Sharpe Ratio: {sharpe_ratio}")
 ```
 In the initial setup, we define the risk-free rate as 2%, representing the annual risk-free rate assumed for our evaluation. We then compute the annual returns of our trading strategy based on the final portfolio values across the specified years. Using these returns, we calculate the excess returns by subtracting the risk-free rate from each return. Next, we determine the average excess return and the standard deviation of the excess returns. Finally, we compute the Sharpe Ratio by dividing the average excess return by the standard deviation, providing a measure of risk-adjusted performance for our trading strategy.
 
+**Sharpe Ratio for Each Stock Market:**
+
+- ^NSEI: -0.19707167490114547
+- ^SPX: 0.07494709503820274
+- ^FTSE: 0.2870109954250266
+- ^HSI: 0.5573678534562041
+- ^N225: -7.685668619341495
 
 
 
