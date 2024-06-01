@@ -620,11 +620,17 @@ In the initial setup, we define the risk-free rate as 2%, representing the annua
 - ^HSI: 0.5573678534562041
 - ^N225: -7.685668619341495
 
+The Sharpe Ratios calculated for each stock market provide insights into the risk-adjusted performance of the trading strategy. A positive Sharpe Ratio indicates that the strategy has yielded returns above the risk-free rate, while a negative Sharpe Ratio suggests the strategy has underperformed the risk-free rate.
 
+The strategy performed best on the Hang Seng Index (^HSI) with a Sharpe Ratio of 0.557, followed by the FTSE 100 Index (^FTSE) with a ratio of 0.287. These positive Sharpe Ratios suggest that the strategy has been effective in these markets, yielding returns that exceed the risk-free rate after adjusting for risk.
 
+However, the strategy underperformed on the NSEI and N225, with Sharpe Ratios of -0.197 and -7.685 respectively. This suggests that the strategy's returns did not compensate for the risk taken in these markets.
 
+It's important to note that these results are based on an assumed risk-free rate of 2% across all markets. In reality, risk-free rates can vary significantly between countries due to factors such as differences in interest rates set by central banks, inflation rates, and economic conditions. This simplification may have influenced the results and should be considered when interpreting the project's findings.
 
+## Conclusion
 
+In conclusion, while the strategy demonstrated promising results in some markets, it also highlighted the complexities and challenges of stock market investment. Future work could explore varying risk-free rates, incorporating more sophisticated risk management strategies, and testing the approach on a wider range of markets.
 
 
 
