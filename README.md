@@ -500,7 +500,7 @@ We calculate and print the return for each year, as well as the number of buy an
     print(f"Number of Buy actions in {year}: {buy_count}")
     print(f"Number of Sell actions in {year}: {sell_count}")
 ```
-We tested the code on 5 major stock exchanges in the world. The ongoing example uses the ^NSEI (Nifty 50 index of India), and the returns for this index are as follows:
+I tested the code on 5 major stock exchanges in the world. The ongoing example uses the ^NSEI (Nifty 50 index of India), and the returns for this index are as follows:
 ```
 ^NSEI:
 Return for 2021: 15.852735476040047%
