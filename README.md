@@ -394,7 +394,7 @@ By labeling the test data windows, we predict the trend for each window based on
 
 In this section, we implement a trading strategy based on the trend labels assigned to the test data windows. The goal is to simulate a trading portfolio, buying and selling shares based on predicted trends, and evaluate the performance over a series of years.
 
-**11.1) Initial Setup**
+**11.1) Initial Setup:**
 We start by defining initial parameters, including the trading cost and the years for which we will evaluate the trading strategy.
 ```python
 # Define the cost
@@ -410,7 +410,7 @@ We also initialize a list to store the final value of the portfolio for each yea
 # Initialize a list to store the final value of your portfolio for each year
 final_values = []
 ```
-**11.2) Simulating Trading for Each Year**
+**11.2) Simulating Trading for Each Year:**
 For each year, we simulate trading by initializing the starting amount of money and the number of shares owned.
 ```python
 # For each year
@@ -427,14 +427,14 @@ We then identify the indices of the test windows that correspond to the current 
     # Get the indices for the current year
     indices_year = [i for i, date in enumerate(test_dates['Date']) if date.year == year and i < len(test_windows)]
 ```
-**11.3) Retrieving Test Windows and Trend Labels**
+**11.3) Retrieving Test Windows and Trend Labels:**
 We retrieve the test windows and trend labels for the current year based on the identified indices.
 ```python
     # Get the test windows and trend labels for the current year
     test_windows_year = [test_windows[i] for i in indices_year]
     test_trend_labels_year = [test_trend_labels[i] for i in indices_year]
 ```
-**11.4) Executing Trades Based on Trend Labels**
+**11.4) Executing Trades Based on Trend Labels:**
 For each window in the test data for the current year, we calculate the current stock price and determine the trading action based on the trend label
 ```python
     # For each window in the test data for the current year
@@ -466,7 +466,7 @@ If the trend label is "DOWN" and we own shares, we sell all shares at the beginn
                 shares = 0
                 actions.append("Sell")
 ```
-**11.5) Finalizing the Year-End Portfolio Value**
+**11.5) Finalizing the Year-End Portfolio Value:**
 At the end of the year, we sell any remaining shares and calculate the final value of the portfolio.
 ```python
     # Sell any shares left at the end of the last day
@@ -482,7 +482,7 @@ At the end of the year, we sell any remaining shares and calculate the final val
     # Store the final value
     final_values.append(final_value)
 ```
-**11.6) Evaluating and Printing the Results**
+**11.6) Evaluating and Printing the Results:**
 We calculate and print the return for each year, as well as the number of buy and sell actions executed.
 ```python
     # Calculate the return
