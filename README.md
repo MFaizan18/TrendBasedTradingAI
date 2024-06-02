@@ -53,7 +53,23 @@ python TrendBasedTradingAI.py
 ```
 ## 5) Model Performance Overview
 
-**5.1) Data Acquisition**
+**5.1) Let's import the necessary libraries**
+
+```python
+import yfinance as yf
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import LinearRegression
+from ta.momentum import RSIIndicator
+from ta.trend import EMAIndicator
+import numpy as np
+import datetime
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
+from datetime import datetime
+import math 
+```
+
+**5.2) Data Acquisition**
 
 We use the `yfinance` library in Python to download historical stock price data from Yahoo Finance. We evaluate our model on five major indices:
 
@@ -68,7 +84,8 @@ For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as a
 ```python
 import yfinance as yf
 ```
-**5.2) Download stock price data**
+**5.3) Download stock price data**
+
 data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
 
 Here's a glimpse of the data we're working with. The first 10 rows of the data are as follows:
@@ -108,12 +125,14 @@ And the last 10 rows of the data are as follows:
 In this section, we perform feature engineering on our dataset. We calculate and add new features that might be useful for our model.
 
 **6.1) Calculate RSI:** The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It is used to identify overbought or oversold conditions in a market. We're using the RSIIndicator from the ta library to calculate the RSI with a window of 14 days (which is a common choice) based on the 'Adj Close' prices. The result is then added as a new column 'RSI' to our DataFrame.
+
 ```python
 # Calculate RSI
 rsi_indicator = RSIIndicator(close=data['Adj Close'], window=14)
 data['RSI'] = rsi_indicator.rsi()
 ```
 **6.2) Calculate 50-day EMA:** The Exponential Moving Average (EMA) is a type of moving average that gives more weight to recent prices, which can make it more responsive to new information. We're calculating the 50-day EMA based on the 'Adj Close' prices and adding it as a new column '50_EMA' to our DataFrame.
+
 ```python
 # Calculate 50-day EMA
 ema_indicator = EMAIndicator(close=data['Adj Close'], window=50)
@@ -121,16 +140,19 @@ data['50_EMA'] = ema_indicator.ema_indicator()
 data.dropna(inplace=True)
 ```
 **6.3) Drop NaN values:** Since the EMA requires a certain amount of data to start calculating, the first few rows of our '50_EMA' column will be NaN. We drop these rows with the ```dropna``` command. This command removes all rows with at least one NaN value in the `data` DataFrame and the changes are made directly to `data`.
+
 ```python
 # Drop NaN values
 data.dropna(inplace=True)
 ```
 **6.4) Drop the 'Close' column:** We drop the 'Close' column as we have the 'Adj Close' column which is a more accurate reflection of the stock's value, as it accounts for dividends and stock splits.
+
 ```python
 # Drop the 'Close' column
 data = data.drop(columns=['Close'])
 ```
 **6.7) Store dates in a separate DataFrame:** We store the dates in a separate DataFrame for future use, as we're going to reset the index of our main DataFrame in the next step.
+
 ```python
 # Store dates in a separate DataFrame
 dates = data.index.to_frame(index=False)
