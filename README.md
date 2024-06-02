@@ -158,6 +158,7 @@ data = data.drop(columns=['Close'])
 dates = data.index.to_frame(index=False)
 ```
 **6.8) Reset index:** We reset the index of our DataFrame. This is done because we want our index to be a simple numerical index, which can be useful for certain operations or algorithms.
+
 ```python
 # Reset index
 data.reset_index(drop=True, inplace=True)
@@ -167,26 +168,31 @@ This completes our feature engineering process, and our data is now ready for th
 ## 7) Data Segmentation and Normalization
 
 **7.1) Divide Data into Training and Test Sets:** The data is divided into training and test sets based on the year. The training set includes data up to and including the year 2020, and the test set includes data from 2021 onwards.
+
 ```python
 training_data = data[dates['Date'].dt.year <= 2020].copy()
 test_data = data[dates['Date'].dt.year > 2020].copy()
 ```
 **7.2) Define Window Lengths:** The window lengths for the antecedent (input) and consequent (output) parts of the model are defined. The total window length is 50, the antecedent part is 40, and the consequent part is the difference between the two (10).
+
 ```python
 wtr = 50  # total window length
 wte = 40  # window length for the antecedent part
 wlm = wtr - wte  # window length for the consequent part
 ```
 **7.3) Initialize MinMaxScaler:** The MinMaxScaler from sklearn is initialized. This scaler will be used to normalize the data.
+
 ```python
 scaler = MinMaxScaler()
 ```
 **7.4) Create and Normalize Antecedent Parts for Training Data:** The antecedent parts for the training data are created and normalized. This is done by creating sliding windows of length wtr over the training data, and then normalizing the first wte elements of each window. The normalized antecedent part and the non-normalized consequent part are then concatenated to form the final window.
+
 ```python
 training_windows = [training_data[i:i + wtr] for i in range(len(training_data) - wtr + 1)]
 training_windows_antece_normalized = [np.concatenate([scaler.fit_transform(window.iloc[:wte]), window.iloc[wte:wtr]], axis=0) for window in training_windows]
 ```
 **7.5) Print Number of Training Windows:** Finally, the number of training windows is printed.
+
 ```python
 print(f"Number of training windows: {len(training_windows)}")
 output: Number of training windows: 2595
@@ -199,6 +205,7 @@ In your project, K-means clustering is advantageous as it groups similar stock m
 
 **8.1) Python implementatio of K-means clustering algorithm:**
 This Python function, k_means_clustering, is an implementation of the K-means clustering algorithm. The function takes four parameters: data (the dataset to be clustered), k (the number of clusters), max_iterations (the maximum number of iterations to run the algorithm), and random_state (a seed for the random number generator to ensure reproducibility).
+
 ```python
 def k_means_clustering(data, k, max_iterations=500, random_state=0):
     np.random.seed(random_state)
@@ -233,6 +240,7 @@ The k_means_clustering function begins by initializing the centroids, randomly s
 
 **8.2) Kronecker delta function:**
 This function is part of a clustering algorithm, likely K-means. It calculates the Kronecker delta function, used to indicate cluster membership of data points.
+
 ```python
 # Calculate Kronecker delta function
     delta = np.zeros((len(data), k))
@@ -247,6 +255,7 @@ In this project, the Kronecker delta function is used in the "Labelling the Clus
 
 **8.3) Applying K-Means Clustering to Antecedent Windows:**
 Now, let's apply the K-means clustering algorithm to the antecedent windows extracted from the training data. We'll use the k_means_clustering function we defined earlier to perform this task.and we are going to set number of clusters ```k=50```. Here's how we call the function:
+
 ```python
 # Extract the antecedent part from each window
 antecedent_windows = [window[:wte] for window in training_windows_antece_normalized]
@@ -261,6 +270,7 @@ In this section of the project code, we're assigning trend labels to the cluster
 
 **9.1) Initializing the Model and Trend Labels:**
 To determine the trend for each cluster, we start by initializing a linear regression model and a dictionary to store the trend labels for each cluster
+
 ```python
 # Initialize the Linear Regression model
 model = LinearRegression()
@@ -270,12 +280,14 @@ cluster_trends = {}
 ```
 **9.2) Preparing the Data:**
 Next, we convert the list training_windows_antece_normalized to a NumPy array and flatten it to 2D for easier manipulation.
+
 ```python
 # Convert the list to a numpy array and flatten it to 2D
 data_array = np.array(training_windows_antece_normalized).reshape(len(training_windows_antece_normalized), -1)
 ```
 **9.3) Selecting Windows for Each Cluster:**
 Using the delta matrix, calculated earlier with the Kronecker delta function, we select the windows belonging to each cluster. The condition delta[:, j] == 1 ensures we get the windows associated with cluster j.
+
 ```python
 # For each cluster
 for j in range(k):
@@ -288,6 +300,7 @@ for j in range(k):
 ```
 **9.4) Extracting and Combining Consequent Parts:**
 For each window in the cluster, the consequent part (following the antecedent part) is extracted and stored in a list. These consequent parts are then concatenated to form a single array, which is used to fit the linear regression model.
+
 ```python
     # Initialize an empty list to store the consequent parts
     consequent_parts = []
@@ -305,6 +318,7 @@ For each window in the cluster, the consequent part (following the antecedent pa
 ```
 **9.5) Fitting the Linear Regression Model:**
 The independent variable t, representing time steps, is created as an array of indices corresponding to the combined consequent parts. The model is then fitted to this data, and the slope of the fitted model indicates the trend.
+
 ```python
     # Fit the linear regression model
     t = np.arange(len(combined_consequent_part)).reshape(-1, 1)  # This is t
@@ -315,6 +329,7 @@ The independent variable t, representing time steps, is created as an array of i
 ```
 **9.6) Assigning Trend Labels:**
 A positive slope suggests an 'UP' trend, while a negative slope indicates a 'DOWN' trend. This trend label is stored in the cluster_trends dictionary.
+
 ```python
     # Assign the trend label based on the slope
     if slope > 0:
@@ -324,6 +339,7 @@ A positive slope suggests an 'UP' trend, while a negative slope indicates a 'DOW
 ```
 **9.7) Counting and Printing Trend Labels:**
 Finally, the number of 'UP' and 'DOWN' labels in the cluster_trends dictionary is counted and printed. By labeling the clusters in this manner, we identify the overall trend within each cluster based on the stock market behavior in the consequent parts of the windows. This labeling is essential for making predictions about future stock market trends and will be used in subsequent sections to label the test data and make trading decisions based on the predicted trends.
+
 ```python
 # Count the number of "UP" labels
 num_up = list(cluster_trends.values()).count("UP")
@@ -345,6 +361,7 @@ In this section, we label the test data windows based on the clusters generated 
 
 **10.1) Setting Up and Creating Test Windows:**
 We start by setting the size of the antecedent part of each window and creating a separate DataFrame for the test dates.
+
 ```python
 antecedent_size = 40
 
@@ -352,12 +369,14 @@ antecedent_size = 40
 test_dates = dates[dates['Date'].dt.year > 2020].copy()
 ```
 Next, we create windows for the test data, ensuring each window has the same antecedent size.
+
 ```python
 # Create windows for the test data
 test_windows = [test_data[i:i + antecedent_size] for i in range(len(test_data) - antecedent_size + 1)]
 ```
 **10.2) Normalizing Test Windows:**
 To ensure consistency in the data, we normalize each test window using the scaler fitted on the training data.
+
 ```python
 # Normalize each window
 test_windows_normalized = [scaler.transform(window) for window in test_windows]
@@ -369,12 +388,14 @@ output: Total number of windows: 815
 ```
 **10.3) Initializing Trend Labels for Test Data:**
 We initialize an empty list to store the trend labels for the test data.
+
 ```python
 # Initialize the trend labels for the test data
 test_trend_labels = []
 ```
 **10.4) Labeling Each Test Window:**
 For each normalized test window, we calculate the Euclidean distance to each cluster center to determine the closest cluster.
+
 ```python
 # For each window in the test data
 for window in test_windows_normalized:
@@ -387,6 +408,7 @@ for window in test_windows_normalized:
 ```
 **10.5) Assigning Trend Labels:**
 We check if the closest cluster index is valid and assign the corresponding trend label from the cluster_trends dictionary. If the index is invalid, an error message is printed.
+
 ```python
     # Check if the closest cluster index is a valid index for the labels array
     if closest_cluster < len(labels):
@@ -398,6 +420,7 @@ We check if the closest cluster index is valid and assign the corresponding tren
 ```
 **10.6) Counting and Printing Trend Labels:**
 To summarize the results, we count the number of each trend label in the test_trend_labels list using the Counter class from the collections module.
+
 ```python
 # Import the Counter class from the collections module
 from collections import Counter
@@ -419,6 +442,7 @@ In this section, we implement a trading strategy based on the trend labels assig
 
 **11.1) Initial Setup:**
 We start by defining initial parameters, including the trading cost and the years for which we will evaluate the trading strategy.
+
 ```python
 # Define the cost
 c = 0.00135
@@ -429,12 +453,14 @@ years = [2021, 2022, 2023, 2024]
 The trading cost, denoted as c, is set to 0.00135. This cost represents the transaction fee associated with each trade, expressed as a proportion of the trade value. Trading costs are a standard aspect of stock trading, incurred during both buy and sell transactions. Including this cost in our simulation ensures that our trading strategy reflects real-world conditions more accurately.
 
 We also initialize a list to store the final value of the portfolio for each year.
+
 ```python
 # Initialize a list to store the final value of your portfolio for each year
 final_values = []
 ```
 **11.2) Simulating Trading for Each Year:**
 For each year, we simulate trading by initializing the starting amount of money and the number of shares owned.
+
 ```python
 # For each year
 for year in years:
@@ -446,12 +472,14 @@ for year in years:
     actions = []
 ```
 We then identify the indices of the test windows that correspond to the current year.
+
 ```python
     # Get the indices for the current year
     indices_year = [i for i, date in enumerate(test_dates['Date']) if date.year == year and i < len(test_windows)]
 ```
 **11.3) Retrieving Test Windows and Trend Labels:**
 We retrieve the test windows and trend labels for the current year based on the identified indices.
+
 ```python
     # Get the test windows and trend labels for the current year
     test_windows_year = [test_windows[i] for i in indices_year]
@@ -459,6 +487,7 @@ We retrieve the test windows and trend labels for the current year based on the 
 ```
 **11.4) Executing Trades Based on Trend Labels:**
 For each window in the test data for the current year, we calculate the current stock price and determine the trading action based on the trend label
+
 ```python
     # For each window in the test data for the current year
     for i in range(len(test_windows_year)):
@@ -469,6 +498,7 @@ For each window in the test data for the current year, we calculate the current 
         current_trend_label = test_trend_labels_year[i]
 ```
 If the trend label is "UP", we buy shares at the beginning of the next window, investing 25% of the available money.
+
 ```python
         if current_trend_label == "UP" :
             # If the current window is "UP", buy shares at the beginning of the next window
@@ -480,6 +510,7 @@ If the trend label is "UP", we buy shares at the beginning of the next window, i
                 actions.append("Buy")
 ```
 If the trend label is "DOWN" and we own shares, we sell all shares at the beginning of the next window.
+
 ```python
         elif current_trend_label == "DOWN" and shares > 0:
             # If the current window is "DOWN", sell all shares at the beginning of the next window
@@ -491,6 +522,7 @@ If the trend label is "DOWN" and we own shares, we sell all shares at the beginn
 ```
 **11.5) Finalizing the Year-End Portfolio Value:**
 At the end of the year, we sell any remaining shares and calculate the final value of the portfolio.
+
 ```python
     # Sell any shares left at the end of the last day
     if shares > 0:
@@ -507,6 +539,7 @@ At the end of the year, we sell any remaining shares and calculate the final val
 ```
 **11.6) Evaluating and Printing the Results:**
 We calculate and print the return for each year, as well as the number of buy and sell actions executed.
+
 ```python
     # Calculate the return
     return_percentage = (final_value / 1000000.0 - 1) * 100
