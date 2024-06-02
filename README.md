@@ -49,7 +49,7 @@ pip install -r requirements.txt
 ```
 **4.4) Run the Script**
 ```bash
-python TrendBasedTradingAI.py
+python main.py
 ```
 ## 5) Model Performance Overview
 
