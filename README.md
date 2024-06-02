@@ -164,7 +164,7 @@ dates = data.index.to_frame(index=False)
 data.reset_index(drop=True, inplace=True)
 ```
 **6.7) Selected Features for Clustering**
-For clustering, we will be using the following features: ```Open```, 'High', 'Low', 'Adj Close', 'Volume', 'RSI', and '50_EMA'. These features have been chosen based on their relevance and potential to provide valuable insights into stock price movements.
+For clustering, we will be using the following features: ```Open```, ```High```, ```Low```, ```Adj Close```, ```Volume```, ```RSI```, and ```50_EMA```. These features have been chosen based on their relevance and potential to provide valuable insights into stock price movements.
 
 This completes our feature engineering process, and our data is now ready for the next steps of our analysis or modeling.
 
