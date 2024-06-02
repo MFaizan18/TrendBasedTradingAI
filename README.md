@@ -53,7 +53,7 @@ python TrendBasedTradingAI.py
 ```
 ## 5) Model Performance Overview
 
-**5.1) Let's import the necessary libraries**
+**5.1) Let's start by importimg the necessary libraries**
 
 ```python
 import yfinance as yf
