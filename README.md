@@ -85,8 +85,9 @@ For the purpose of this explanation, we will use the Nifty 50 index (^NSEI) as a
 import yfinance as yf
 ```
 **5.3) Download stock price data**
-
+```python
 data = yf.download("^NSEI", start="2010-01-01", end="2024-05-25", interval="1d")
+```
 
 Here's a glimpse of the data we're working with. The first 10 rows of the data are as follows:
 ```
